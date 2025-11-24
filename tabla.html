@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resultados del Cuestionario</title>
+<style>
+  body{
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: #0f1724;
+    color: #e6eef8;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    min-height:100vh;
+    padding:40px;
+  }
+  h1{ color:#60a5fa; margin-bottom:30px; }
+  table{
+    width:100%;
+    max-width:600px;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  th, td{
+    padding:12px 16px;
+    text-align:center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  th{
+    background: rgba(96,165,250,0.2);
+  }
+  tr:last-child td{
+    border-bottom:none;
+  }
+  button{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#60a5fa;
+    color:#06243a;
+    font-weight:700;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Resultados del Cuestionario</h1>
+<table id="tablaResultados">
+  <tr>
+    <th>Fecha y Hora</th>
+    <th>Puntaje</th>
+  </tr>
+</table>
+
+<button onclick="location.href='index.html'">Volver</button>
+
+<script>
+  const resultados = JSON.parse(localStorage.getItem("resultadosCuestionario")) || [];
+  const tabla = document.getElementById("tablaResultados");
+
+  resultados.forEach(r => {
+    const fila = document.createElement("tr");
+    const celFecha = document.createElement("td");
+    const celPuntos = document.createElement("td");
+
+    celFecha.textContent = r.fecha;
+    celPuntos.textContent = r.puntos + "/6"; // 6 es el total de preguntas
+
+    fila.appendChild(celFecha);
+    fila.appendChild(celPuntos);
+    tabla.appendChild(fila);
+  });
+</script>
+
+</body>
+</html>
